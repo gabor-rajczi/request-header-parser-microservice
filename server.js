@@ -11,13 +11,13 @@ function running(){
 }
 
 function parseHeader(req, res){
-    var ip = req.ip.split(":").pop();
+    var ip = req.headers['x-forwarded-for'];
     var acceptLanguage = req.headers["accept-language"].split(",")[0];
     var userAgent = req.headers['user-agent'].split("(")[1].split(")")[0];
     var result = {
         ipaddress: ip,
         language: acceptLanguage,
-        software: userAgent
+        software: userAgent,
     }
     res.send(result);
 }
